@@ -110,8 +110,8 @@ namespace Tetris
 					}
 					else
 					{
-						//board.Data[result1, result2] = 1;
-						blockPosition = 04;
+						board.Data[result1, result2] = 1;
+						blockPosition = 04; // somehow wrong order i don't know how to fix this
 						result1 = movePiece(blockPosition, 1);
 						result2 = movePiece(blockPosition, 2);
 					}
