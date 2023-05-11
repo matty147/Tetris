@@ -81,22 +81,43 @@ namespace Tetris
 			result1 = movePiece(blockPosition, 1);
 			result2 = movePiece(blockPosition, 2);
 			board.Data[result1, result2] = 1;
+			board.Data[4,15] = 1;
 			board.Print();
 			for (; ; )
 			{
 				if (blockShoudMove < 0)
 				{
 					Console.Clear();
-					result1 = movePiece(blockPosition, 1);
-					result2 = movePiece(blockPosition, 2);
-					board.Data[result1, result2] = 0;
-					blockPosition = blockPosition + 10;
-					result1 = movePiece(blockPosition, 1);
-					result2 = movePiece(blockPosition, 2);
-					board.Data[result1, result2] = 1;
+					if (result2 <= 19 && board.Data[result1, result2 + 1] == 0)
+					{
+						result1 = movePiece(blockPosition, 1); // big ugly block of code :/
+						if (blockPosition >= 100)
+						{
+							result2 = movePiece(blockPosition, 2);
+							result2 += movePiece(blockPosition, 3) * 10;
+						}
+						else result2 = movePiece(blockPosition, 2);
+						board.Data[result1, result2] = 0;
+						blockPosition = blockPosition + 10;
+						result1 = movePiece(blockPosition, 1);
+						if (blockPosition >= 100)
+						{
+							result2 = movePiece(blockPosition, 2);
+							result2 += movePiece(blockPosition, 3) * 10;
+						}
+						else result2 = movePiece(blockPosition, 2);
+						board.Data[result1, result2] = 1;
+					}
+					else
+					{
+						//board.Data[result1, result2] = 1;
+						blockPosition = 04;
+						result1 = movePiece(blockPosition, 1);
+						result2 = movePiece(blockPosition, 2);
+					}
 					board.Print();
 					blockShoudMove = blockShoudMoveDef;				
-					if (blockShoudMoveDef > 5)
+					if (blockShoudMoveDef > 5) // makes the game faster
 					{
 						blockShoudMoveDef = blockShoudMoveDef - 0.01f;
 					}
