@@ -63,24 +63,15 @@ namespace Tetris
 	}
 	internal class Program
 	{
-		static int movePiece(int blockPosition, int place)
-		{
-			int result = (blockPosition / (int)Math.Pow(10, place - 1)) % 10; // gets the x position of the block
-
-			return result;
-		}
 		static void Main(string[] args)
 		{
 			//int[,] board;
 			float blockShoudMove = 5; // This will determin the game speed
 			float blockShoudMoveDef = blockShoudMove; 
 			Board board = new Board(10, 20);
-			int blockPosition = 04; // fisrt number is a x and the second is y 
-			int result1;
-			int result2;
-			result1 = movePiece(blockPosition, 1);
-			result2 = movePiece(blockPosition, 2);
-			board.Data[result1, result2] = 1;
+			int blockX = 4;
+			int blockY = 0;
+			board.Data[blockX, blockY] = 1;
 			board.Data[4,15] = 1;
 			board.Print();
 			for (; ; )
@@ -88,35 +79,20 @@ namespace Tetris
 				if (blockShoudMove < 0)
 				{
 					Console.Clear();
-					if (result2 <= 19 && board.Data[result1, result2 + 1] == 0)
+					if (blockY <= 19 && board.Data[blockX, blockY + 1] == 0)
 					{
-						result1 = movePiece(blockPosition, 1); // big ugly block of code :/
-						if (blockPosition >= 100)
-						{
-							result2 = movePiece(blockPosition, 2);
-							result2 += movePiece(blockPosition, 3) * 10;
-						}
-						else result2 = movePiece(blockPosition, 2);
-						board.Data[result1, result2] = 0;
-						blockPosition = blockPosition + 10;
-						result1 = movePiece(blockPosition, 1);
-						if (blockPosition >= 100)
-						{
-							result2 = movePiece(blockPosition, 2);
-							result2 += movePiece(blockPosition, 3) * 10;
-						}
-						else result2 = movePiece(blockPosition, 2);
-						board.Data[result1, result2] = 1;
+						board.Data[blockX, blockY] = 0;
+						blockY++;
+						board.Data[blockX, blockY] = 1;
 					}
 					else
 					{
-						board.Data[result1, result2] = 1;
-						blockPosition = 04; // somehow wrong order i don't know how to fix this
-						result1 = movePiece(blockPosition, 1);
-						result2 = movePiece(blockPosition, 2);
+						blockX = 4;
+						blockY = 0;
+						board.Data[blockX, blockY] = 1;
 					}
 					board.Print();
-					blockShoudMove = blockShoudMoveDef;				
+					blockShoudMove = blockShoudMoveDef;
 					if (blockShoudMoveDef > 5) // makes the game faster
 					{
 						blockShoudMoveDef = blockShoudMoveDef - 0.01f;
