@@ -73,24 +73,28 @@ namespace Tetris
 			int blockY = 0;
 			board.Data[blockX, blockY] = 1;
 			board.Data[4,15] = 0;
-			board.Print();
 			int moveXAxis = 0;
 			Console.TreatControlCAsInput = true;
 			ConsoleKeyInfo cki;
+			MyConsole.Color("Please Input the button you would like to use for moving Left", ConsoleColor.Green);
+			ConsoleKeyInfo Left = Console.ReadKey();
+			MyConsole.Color("Please Input the button you would like to use for moving Right", ConsoleColor.Green);
+			ConsoleKeyInfo Right = Console.ReadKey();
 			MyConsole.Color("Type S to start" , ConsoleColor.Green);
 			cki = Console.ReadKey();
 			int keyEnterd = 1;
+			Console.Clear();
+			board.Print();
 			for (; ; )
 			{
 				if (keyEnterd == 0)
 				{
 					cki = Console.ReadKey();
 					keyEnterd = 1;
-					if (cki.ToString() == "A") //this dosen't work :/
+					if (cki.Equals(Left))
 					{
-						Console.WriteLine("Here");
 						moveXAxis = -1;
-					}else if (cki.ToString() == "D")
+					}else if (cki.Equals(Right))
 					{
 						moveXAxis = 1;
 					}
@@ -103,8 +107,6 @@ namespace Tetris
 					{
 						board.Data[blockX, blockY] = 0;
 						blockX = blockX + moveXAxis;
-						Console.WriteLine(blockX);
-						Console.WriteLine(moveXAxis);
 						blockY++;
 						board.Data[blockX, blockY] = 1;
 					}
