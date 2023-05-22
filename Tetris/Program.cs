@@ -84,6 +84,7 @@ namespace Tetris
 			MyConsole.Color("Type S to start" , ConsoleColor.Green);
 			cki = Console.ReadKey();
 			int keyEnterd = 1;
+			int forceMoveDown = 5;
 			Console.Clear();
 			board.Print();
 			for (; ; )
@@ -110,7 +111,12 @@ namespace Tetris
 						{
 							board.Data[blockX, blockY] = 0;
 							blockX = blockX + moveXAxis;
-							blockY++;
+							if (forceMoveDown == 0 || moveXAxis == 0)
+							{
+								blockY++;
+								forceMoveDown = 5;
+							}
+							else forceMoveDown--;
 							board.Data[blockX, blockY] = 1;
 						}else
 						{
