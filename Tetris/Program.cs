@@ -67,12 +67,13 @@ namespace Tetris
 		{
 			//int[,] board;
 			float blockShoudMove = 5; // This will determin the game speed
-			float blockShoudMoveDef = blockShoudMove; 
-			Board board = new Board(10, 20);
+			float blockShoudMoveDef = blockShoudMove;
+			int maxBoardX = 10, maxBoardY = 20;
+			Board board = new Board(maxBoardX, maxBoardY);
 			int blockX = 4;
 			int blockY = 0;
 			board.Data[blockX, blockY] = 1;
-			board.Data[4,15] = 0;
+			//board.Data[4,15] = 0;
 			int moveXAxis = 0;
 			Console.TreatControlCAsInput = true;
 			ConsoleKeyInfo cki;
@@ -103,12 +104,29 @@ namespace Tetris
 				if (blockShoudMove < 0)
 				{
 					Console.Clear();
-					if (blockY <= 18 && board.Data[blockX, blockY + 1] == 0)
+					if (blockY <= maxBoardY - 2 && board.Data[blockX, blockY + 1] == 0)
 					{
-						board.Data[blockX, blockY] = 0;
-						blockX = blockX + moveXAxis;
-						blockY++;
-						board.Data[blockX, blockY] = 1;
+						if (blockX <= maxBoardX - 2 && 1 <= blockX)
+						{
+							board.Data[blockX, blockY] = 0;
+							blockX = blockX + moveXAxis;
+							blockY++;
+							board.Data[blockX, blockY] = 1;
+						}else
+						{
+							board.Data[blockX, blockY] = 0;
+							blockY++;
+							board.Data[blockX, blockY] = 1;
+						}
+						/* // should return the block into the the board
+						if (blockX <= 0)
+						{
+							blockX = 1;
+						}else if (blockX <= maxBoardX - 1)
+						{
+							blockX = 18;
+						}
+						*/
 					}
 					else
 					{
