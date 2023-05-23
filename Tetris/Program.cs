@@ -58,7 +58,20 @@ namespace Tetris
 				}
 				Console.WriteLine("|");
 			}
-
+		}
+		public void CanClearLine()
+		{
+			for (int r = 0; r < Height; r++)
+			{
+				for (int c = 0; c < Width; c++)
+				{
+					if (Data[c, r] == 0) //always equals zero
+					{
+						//MyConsole.Color($"", ConsoleColor.Blue);
+					}
+					else MyConsole.Color("Hello", ConsoleColor.Red);
+				}
+			}
 		}
 	}
 	internal class Program
@@ -85,6 +98,7 @@ namespace Tetris
 			cki = Console.ReadKey();
 			int keyEnterd = 1;
 			int forceMoveDown = 5;
+			int score = 0;
 			Console.Clear();
 			board.Print();
 			for (; ; )
@@ -107,14 +121,17 @@ namespace Tetris
 					Console.Clear();
 					if (blockY <= maxBoardY - 2 && board.Data[blockX, blockY + 1] == 0)
 					{
-						if (blockX <= maxBoardX - 2 && 1 <= blockX)
+						//if (blockX <= maxBoardX - 2 && 1 <= blockX) //this is broken when on a edge you can't go back
+						if (1==1)
 						{
 							board.Data[blockX, blockY] = 0;
 							blockX = blockX + moveXAxis;
 							if (forceMoveDown == 0 || moveXAxis == 0)
 							{
 								blockY++;
+								score++;
 								forceMoveDown = 5;
+								board.CanClearLine();
 							}
 							else forceMoveDown--;
 							board.Data[blockX, blockY] = 1;
@@ -138,7 +155,7 @@ namespace Tetris
 					{
 						blockX = 4;
 						blockY = 0;
-						board.Data[blockX, blockY] = 1;
+						board.Data[blockX, blockY] = 1;	
 					}
 					board.Print();
 					moveXAxis = 0;
