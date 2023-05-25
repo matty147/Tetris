@@ -61,16 +61,24 @@ namespace Tetris
 		}
 		public void CanClearLine()
 		{
+			int LineCheck = 0;
+			MyConsole.Color($"W: {Width}", ConsoleColor.Red);
 			for (int r = 0; r < Height; r++)
 			{
 				for (int c = 0; c < Width; c++)
 				{
-					if (Data[c, r] == 0) //always equals zero
+					if (Data[c, r] == 1) LineCheck++;
+					if (LineCheck == 10)
 					{
-						//MyConsole.Color($"", ConsoleColor.Blue);
+						for (int i = 0; i < Width; i++)
+						{
+							Data[i, r] = 0;
+						}
+						break; // Exit the loop after clearing the line
 					}
-					else MyConsole.Color("Hello", ConsoleColor.Red);
 				}
+				//MyConsole.Color("G", ConsoleColor.Red);
+				LineCheck = 0;
 			}
 		}
 	}
@@ -81,7 +89,7 @@ namespace Tetris
 			//int[,] board;
 			float blockShoudMove = 5; // This will determin the game speed
 			float blockShoudMoveDef = blockShoudMove;
-			int maxBoardX = 10, maxBoardY = 20;
+			int maxBoardX = 10, maxBoardY = 7;
 			Board board = new Board(maxBoardX, maxBoardY);
 			int blockX = 4;
 			int blockY = 0;
@@ -101,6 +109,11 @@ namespace Tetris
 			int score = 0;
 			Console.Clear();
 			board.Print();
+			/* //for testing clear line
+			for (int i = 0; i < board.Width-1; i++)
+			{
+				board.Data[i,6] = 1;
+			}*/
 			for (; ; )
 			{
 				if (keyEnterd == 0)
