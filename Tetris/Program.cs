@@ -35,7 +35,7 @@ namespace Tetris
 		{
 			this.Width = width;
 			this.Height = height;
-			this.Data = new int[width,height];
+			this.Data = new int[width, height];
 		}
 
 		public void Print()
@@ -59,10 +59,14 @@ namespace Tetris
 				Console.WriteLine("|");
 			}
 		}
+		private static void MovePieceDown()
+		{
+
+		}
 		public void CanClearLine()
 		{
 			int LineCheck = 0;
-			MyConsole.Color($"W: {Width}", ConsoleColor.Red);
+			//MyConsole.Color($"W: {Width}", ConsoleColor.Red);
 			for (int r = 0; r < Height; r++)
 			{
 				for (int c = 0; c < Width; c++)
@@ -72,7 +76,7 @@ namespace Tetris
 					{
 						for (int i = 0; i < Width; i++)
 						{
-							Data[i, r] = 0;
+							Data[i, r] = 0; // Have to move the line one space lower
 						}
 						break; // Exit the loop after clearing the line
 					}
@@ -89,7 +93,7 @@ namespace Tetris
 			//int[,] board;
 			float blockShoudMove = 5; // This will determin the game speed
 			float blockShoudMoveDef = blockShoudMove;
-			int maxBoardX = 10, maxBoardY = 7;
+			int maxBoardX = 10, maxBoardY = 20;
 			Board board = new Board(maxBoardX, maxBoardY);
 			int blockX = 4;
 			int blockY = 0;
@@ -109,11 +113,15 @@ namespace Tetris
 			int score = 0;
 			Console.Clear();
 			board.Print();
-			/* //for testing clear line
+			//for testing clear line
 			for (int i = 0; i < board.Width-1; i++)
 			{
-				board.Data[i,6] = 1;
-			}*/
+				board.Data[i,19] = 1;
+			}
+			for (int i = 0; i < board.Width - 1; i++)
+			{
+				board.Data[i, 18] = 1;
+			}
 			for (; ; )
 			{
 				if (keyEnterd == 0)
