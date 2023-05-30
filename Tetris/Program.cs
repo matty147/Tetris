@@ -142,8 +142,7 @@ namespace Tetris
 					Console.Clear();
 					if (blockY <= maxBoardY - 2 && board.Data[blockX, blockY + 1] == 0)
 					{
-						//if (blockX <= maxBoardX - 2 && 1 <= blockX) //this is broken when on a edge you can't go back
-						if (1==1)
+						if ((blockX + moveXAxis) >= 0 && (blockX + moveXAxis) < maxBoardX)
 						{
 							board.Data[blockX, blockY] = 0;
 							blockX = blockX + moveXAxis;
@@ -154,34 +153,29 @@ namespace Tetris
 								forceMoveDown = 5;
 								board.CanClearLine();
 							}
-							else forceMoveDown--;
+							else
+							{
+								forceMoveDown--;
+							}
 							board.Data[blockX, blockY] = 1;
-						}else
+						}
+						else
 						{
 							board.Data[blockX, blockY] = 0;
 							blockY++;
 							board.Data[blockX, blockY] = 1;
 						}
-						/* // should return the block into the the board
-						if (blockX <= 0)
-						{
-							blockX = 1;
-						}else if (blockX <= maxBoardX - 1)
-						{
-							blockX = 18;
-						}
-						*/
 					}
 					else
 					{
 						blockX = 4;
 						blockY = 0;
-						board.Data[blockX, blockY] = 1;	
+						board.Data[blockX, blockY] = 1;
 					}
 					board.Print();
 					moveXAxis = 0;
 					blockShoudMove = blockShoudMoveDef;
-					if (blockShoudMoveDef > 5) // makes the game faster
+					if (blockShoudMoveDef > 5) // makes the game gradualy faster
 					{
 						blockShoudMoveDef = blockShoudMoveDef - 0.01f;
 					}
