@@ -137,13 +137,13 @@ namespace Tetris
 						moveXAxis = 1;
 					}
 				}
-				Console.WriteLine(cki.Key.ToString());
+				//Console.WriteLine(cki.Key.ToString());
 
 				// Rest of your game logic goes here
 				// ...
 
 				// Example: Simulating game loop delay
-				System.Threading.Thread.Sleep(100);
+				//System.Threading.Thread.Sleep(100);
 			if (blockShoudMove < 0)
 				{
 					Console.Clear();
@@ -158,7 +158,6 @@ namespace Tetris
 								blockY++;
 								score++;
 								forceMoveDown = 5;
-								board.CanClearLine();
 							}
 							else
 							{
@@ -178,6 +177,7 @@ namespace Tetris
 						blockX = 4;
 						blockY = 0;
 						board.Data[blockX, blockY] = 1;
+						board.CanClearLine();
 					}
 					board.Print();
 					moveXAxis = 0;
