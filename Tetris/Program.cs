@@ -101,22 +101,23 @@ namespace Tetris
 			//board.Data[4,15] = 0;
 			int moveXAxis = 0;
 			Console.TreatControlCAsInput = true;
+			Console.TreatControlCAsInput = true;
 			ConsoleKeyInfo cki;
 			MyConsole.Color("Please Input the button you would like to use for moving Left", ConsoleColor.Green);
-			ConsoleKeyInfo Left = Console.ReadKey();
+			ConsoleKey Left = Console.ReadKey().Key;
 			MyConsole.Color("Please Input the button you would like to use for moving Right", ConsoleColor.Green);
-			ConsoleKeyInfo Right = Console.ReadKey();
-			MyConsole.Color("Type S to start" , ConsoleColor.Green);
+			ConsoleKey Right = Console.ReadKey().Key;
+			MyConsole.Color("Type S to start", ConsoleColor.Green);
 			cki = Console.ReadKey();
-			int keyEnterd = 1;
+			int keyEntered = 1;
 			int forceMoveDown = 5;
 			int score = 0;
 			Console.Clear();
 			board.Print();
-			//for testing clear line
-			for (int i = 0; i < board.Width-1; i++)
+			// for testing clear line
+			for (int i = 0; i < board.Width - 1; i++)
 			{
-				board.Data[i,19] = 1;
+				board.Data[i, 19] = 1;
 			}
 			for (int i = 0; i < board.Width - 1; i++)
 			{
@@ -124,20 +125,26 @@ namespace Tetris
 			}
 			for (; ; )
 			{
-				if (keyEnterd == 0)
+				if (Console.KeyAvailable)
 				{
-					cki = Console.ReadKey();
-					keyEnterd = 1;
-					if (cki.Equals(Left))
+					cki = Console.ReadKey(true);
+					if (cki.Key == Left)
 					{
 						moveXAxis = -1;
-					}else if (cki.Equals(Right))
+					}
+					else if (cki.Key == Right)
 					{
 						moveXAxis = 1;
 					}
 				}
 				Console.WriteLine(cki.Key.ToString());
-				if (blockShoudMove < 0)
+
+				// Rest of your game logic goes here
+				// ...
+
+				// Example: Simulating game loop delay
+				System.Threading.Thread.Sleep(100);
+			if (blockShoudMove < 0)
 				{
 					Console.Clear();
 					if (blockY <= maxBoardY - 2 && board.Data[blockX, blockY + 1] == 0)
@@ -179,7 +186,7 @@ namespace Tetris
 					{
 						blockShoudMoveDef = blockShoudMoveDef - 0.01f;
 					}
-					keyEnterd = 0;
+					//keyEnterd = 0;
 				}
 				else
 				{
