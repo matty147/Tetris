@@ -136,14 +136,14 @@ namespace Tetris
 			ConsoleKey Left = Console.ReadKey().Key;
 			MyConsole.Color("Please Input the button you would like to use for moving Right", ConsoleColor.Green);
 			ConsoleKey Right = Console.ReadKey().Key;
-			MyConsole.Color("Type S to start", ConsoleColor.Green);
+			MyConsole.Color("Please Input the button you would like to use for moving Down", ConsoleColor.Green);
 			cki = Console.ReadKey();
 			int keyEntered = 1;
 			int forceMoveDown = 5;
 			int score = 0;
 			Console.Clear();
 			board.Print();
-			board.TestBoard();
+			//board.TestBoard();	
 			for (; ; )
 			{
 				if (Console.KeyAvailable)
@@ -159,12 +159,6 @@ namespace Tetris
 					}
 				}
 				//Console.WriteLine(cki.Key.ToString());
-
-				// Rest of your game logic goes here
-				// ...
-
-				// Example: Simulating game loop delay
-				//System.Threading.Thread.Sleep(100);
 			if (blockShoudMove < 0)
 				{
 					Console.Clear();
