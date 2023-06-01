@@ -62,6 +62,17 @@ namespace Tetris
 		public void MoveBoardDown(int row)
 		{
 			//MyConsole.Color($"{Height - row }", ConsoleColor.Red);
+			for (int r = row - 1; r >= 0 ; r--)
+			{
+				for (int c = 0; c < Width; c++)
+				{
+					if (Data[c,r] == 1)
+					{
+						Data[c, r] = 0;
+						Data[c, r + 1] = 1;
+					}
+				}
+			}
 		}
 		public void CanClearLine()
 		{
@@ -175,10 +186,10 @@ namespace Tetris
 					}
 					else
 					{
+						board.CanClearLine();
 						blockX = 4;
 						blockY = 0;
 						board.Data[blockX, blockY] = 1;
-						board.CanClearLine();
 					}
 					board.Print();
 					moveXAxis = 0;
