@@ -62,17 +62,34 @@ namespace Tetris
 		public void MoveBoardDown(int row)
 		{
 			//MyConsole.Color($"{Height - row }", ConsoleColor.Red);
-			for (int r = row - 1; r >= 0 ; r--)
+			for (int r = row - 1; r >= 0; r--)
 			{
 				for (int c = 0; c < Width; c++)
 				{
-					if (Data[c,r] == 1)
+					if (Data[c, r] == 1)
 					{
 						Data[c, r] = 0;
 						Data[c, r + 1] = 1;
 					}
 				}
 			}
+		}
+		public void TestBoard()
+		{
+			for (int i = 0; i < Width - 1; i++)
+			{
+				Data[i, 19] = 1;
+			}
+			for (int i = 0; i < Width - 1; i++)
+			{
+				Data[i, 18] = 1;
+			}
+			Data[0, 15] = 1;
+			Data[2, 14] = 1;
+			Data[5, 10] = 1;
+			Data[1, 2] = 1;
+			Data[4, 13] = 1;
+			Data[6, 12] = 1;
 		}
 		public void CanClearLine()
 		{
@@ -100,7 +117,7 @@ namespace Tetris
 	}
 	internal class Program
 	{
-		static void Main(string[] args)
+	static void Main(string[] args)
 		{
 			//int[,] board;
 			float blockShoudMove = 5; // This will determin the game speed
@@ -126,15 +143,7 @@ namespace Tetris
 			int score = 0;
 			Console.Clear();
 			board.Print();
-			// for testing clear line
-			for (int i = 0; i < board.Width - 1; i++)
-			{
-				board.Data[i, 19] = 1;
-			}
-			for (int i = 0; i < board.Width - 1; i++)
-			{
-				board.Data[i, 18] = 1;
-			}
+			board.TestBoard();
 			for (; ; )
 			{
 				if (Console.KeyAvailable)
