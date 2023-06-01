@@ -59,9 +59,9 @@ namespace Tetris
 				Console.WriteLine("|");
 			}
 		}
-		private static void MovePieceDown()
+		public void MoveBoardDown(int row)
 		{
-
+			//MyConsole.Color($"{Height - row }", ConsoleColor.Red);
 		}
 		public void CanClearLine()
 		{
@@ -76,10 +76,9 @@ namespace Tetris
 					{
 						for (int i = 0; i < Width; i++)
 						{
-							Data[i, r] = 0; // Have to move the line one space lower
-							// will call a funcion here will input r as the row and move the lines above it one lower
-							//MyConsole.Color($"row = {r}", ConsoleColor.Red);
+							Data[i, r] = 0;
 						}
+						MoveBoardDown(r);
 						break; // Exit the loop after clearing the line
 					}
 				}
@@ -202,3 +201,9 @@ namespace Tetris
 		}
 	}
 }
+
+/*
+ * this can play sounds from a file.
+ * System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"c:\mywavfile.wav");
+ * player.Play(); 
+ */
