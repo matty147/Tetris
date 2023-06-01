@@ -77,6 +77,8 @@ namespace Tetris
 						for (int i = 0; i < Width; i++)
 						{
 							Data[i, r] = 0; // Have to move the line one space lower
+							// will call a funcion here will input r as the row and move the lines above it one lower
+							//MyConsole.Color($"row = {r}", ConsoleColor.Red);
 						}
 						break; // Exit the loop after clearing the line
 					}
